@@ -6,7 +6,7 @@
   
   Aşağıda ekran görüntüsünü görebilirsiniz.
   
-![Alt text](https://github.com/fuxprojesi/terminal/blob/master/terminal.png "Terminal Ekran Görüntüsü")
+![Alt text](https://gitlab.com/fuxproject/terminal/raw/master/terminal.png "Terminal Ekran Görüntüsü")
 
 # Terminal'in özellikleri:
 
