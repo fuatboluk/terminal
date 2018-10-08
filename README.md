@@ -55,7 +55,7 @@
  
  ## Komut
  
- * gcc `\`pkg-config --cflags --libs gtk+-3.0 vte-2.91\`` -o terminal /home/fuat/terminal-master/src/terminal.c
+ * gcc \`pkg-config --cflags --libs gtk+-3.0 vte-2.91\` -o terminal /home/fuat/terminal-master/src/terminal.c
  
  * Derleme tamamlanınca bulunduğunuz dizinde terminal adı ile bir ikili dosya oluşacaktır. Bu dosyayı /usr/bin dizini içine kopyalayın.
  * /home/fuat/terminal-master/terminal.desktop dosyasını da /usr/share/applications dizinine kopyalayın.
