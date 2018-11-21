@@ -13,7 +13,6 @@
 *  Özel klavye kısayolları.
 *  Oturum açan kullanıcıya göre değişken başlık.
 *  Sürükle-Bırak ile dizin, dosya konumlarını terminale aktarma.
-*  Fare sağ tuş menüsü (Terminal Aç, Kopyala, Yapıştır, Ekranı Temizle, Komut Geçmişi, Terminali Kapat)
 *  Fare ile seçilerek kopyalanan metni önbelleğe alır. Metni ister terminale isterseniz herhangi bir belgeye yapıştırabilirsiniz.
 *  Standart bir terminaldir ve diğer tüm terminallerde olan özellikleri içerir.
 
@@ -24,8 +23,6 @@
 |  Ctrl + Shift + T | Terminal Aç |
 |  Ctrl + Shift + C | Kopyala |
 |  Ctrl + Shift + V | Yapıştır |
-|  Ctrl + Shift + E | Ekranı Temizle |
-|  Ctrl + Shift + H | Komut Geçmişi |
 |  Ctrl + Shift + Q | Terminali Kapat |
 |  Ctrl + Shift + R | Geçmiş Komutlardan Tamamla (Arama) |
 |  Ctrl + Shift + Up | Çıktıyı Yukarı Kaydır (Satır) |
@@ -47,7 +44,6 @@
  * vte291-devel
  * coreutils
  * bash
- * gcc
   
  # Derleme ve Çalıştırma
  
@@ -60,4 +56,3 @@
  * Derleme tamamlanınca bulunduğunuz dizinde terminal adı ile bir ikili dosya oluşacaktır. Bu dosyayı /usr/bin dizini içine kopyalayın.
  * /home/fuat/terminal-master/terminal.desktop dosyasını da /usr/share/applications dizinine kopyalayın.
  * Dilerseniz LICENSE ve README.md dosyalarını /usr/share/doc dizini içerisinde terminal adında bir dizin oluşturarak içine kopyalayabilirsiniz.
-
