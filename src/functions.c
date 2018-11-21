@@ -2,46 +2,21 @@
 
 
 /* Open */
-static gboolean open(GtkWidget *terminal, gpointer user_data)
+static void open(GtkButton *new_button, GtkWidget *terminal)
 {
-    char cmd[1000];
-    strcpy(cmd, "terminal");
-    system(cmd);
-    return TRUE;
+    system(" terminal & disown ");
 }
 
 
 /* Copy */
-static gboolean copy(GtkWidget *terminal, gpointer cmd)
+static void copy(GtkButton *copy_button, GtkWidget *terminal)
 {
     vte_terminal_copy_clipboard(VTE_TERMINAL(terminal));
-    return TRUE;
 }
 
 
 /* Paste */
-static gboolean paste(GtkWidget *terminal, gpointer cmd)
+static void paste(GtkButton *paste_button, GtkWidget *terminal)
 {
     vte_terminal_paste_clipboard(VTE_TERMINAL(terminal));
-    return TRUE;
-}
-
-
-/* Clear */
-static gboolean clear(GtkWidget *terminal, gpointer user_data)
-{
-    char cmd[1000];
-    strcpy(cmd, " clear \n");
-    vte_terminal_feed_child(VTE_TERMINAL(terminal), cmd, strlen(cmd));
-    return TRUE;
-}
-
-
-/* History */
-static gboolean history(GtkWidget *terminal, gpointer user_data)
-{
-    char cmd[1000];
-    strcpy(cmd, " history \n");
-    vte_terminal_feed_child(VTE_TERMINAL(terminal), cmd, strlen(cmd));
-    return TRUE;
 }
