@@ -18,15 +18,13 @@ static gboolean on_drag_drop(GtkWidget *terminal, GdkDragContext *context, gint 
     const gchar *name = gtk_widget_get_name(terminal);
     valid = TRUE;
 
-    if (gdk_drag_context_list_targets(context))
-    {
+    if (gdk_drag_context_list_targets(context)) {
         target = GDK_POINTER_TO_ATOM(gdk_drag_context_list_targets(context));
         gtk_drag_get_data(terminal, context, target, time);
-    }
-    else
-    {
+    } else {
         valid = FALSE;
     }
+
     return valid;
 }
 
@@ -42,21 +40,17 @@ static gboolean on_drag_data_received(GtkWidget *terminal, GdkDragContext *conte
 
     const gchar *name = gtk_widget_get_name(terminal);
 
-    if((selection_data != NULL) && (gtk_selection_data_get_length(selection_data) >= 0))
-    {
+    if((selection_data != NULL) && (gtk_selection_data_get_length(selection_data) >= 0)) {
 
-        if (gdk_drag_context_get_suggested_action(context) == GDK_ACTION_COPY)
-        {
+        if (gdk_drag_context_get_suggested_action(context) == GDK_ACTION_COPY) {
             success_data = TRUE;
         }
 
-        if (gdk_drag_context_get_suggested_action(context) == GDK_ACTION_MOVE)
-        {
+        if (gdk_drag_context_get_suggested_action(context) == GDK_ACTION_MOVE) {
             success_data = TRUE;
         }
 
-        if (gdk_drag_context_get_suggested_action(context) == GDK_ACTION_LINK)
-        {
+        if (gdk_drag_context_get_suggested_action(context) == GDK_ACTION_LINK) {
             success_data = TRUE;
         }
 
