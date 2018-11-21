@@ -19,15 +19,13 @@
 #include "shortcuts.c"
 #include "dragdrop.c"
 #include "functions.c"
-#include "popupmenu.c"
 
 
 /* Change Title */
-static gboolean on_title_changed(GtkWidget *terminal, gpointer user_data)
+static void on_title_changed(GtkWidget *terminal, gpointer user_data)
 {
     GtkWindow *window = user_data;
-    gtk_window_set_title(window, vte_terminal_get_window_title(VTE_TERMINAL(terminal)));
-    return TRUE;
+    gtk_window_set_title(GTK_WINDOW(window), vte_terminal_get_window_title(VTE_TERMINAL(terminal)));
 }
 
 
@@ -35,6 +33,7 @@ static gboolean on_title_changed(GtkWidget *terminal, gpointer user_data)
 int main(int argc, char *argv[])
 {
     GtkWidget *window, *terminal, *scrolled;
+    GtkWidget *header, *new_button, *copy_button, *paste_button;
     GdkRGBA back_rgba = { 0, 0, 0, 0.9 };
     GdkRGBA front_rgba = { 1, 1, 1, 1.0 };
     PangoFontDescription *font = NULL;
@@ -44,14 +43,28 @@ int main(int argc, char *argv[])
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(window), 765, 360);
-    gtk_window_set_title(GTK_WINDOW(window), "Terminal");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name(GTK_WINDOW(window), "utilities-terminal");
 
-    gtk_widget_set_app_paintable(GTK_WINDOW(window), TRUE);
+    header = gtk_header_bar_new();
+    gtk_header_bar_set_show_close_button(GTK_HEADER_BAR(header), TRUE);
+    gtk_header_bar_set_title(GTK_HEADER_BAR(header), "Terminal");
+    gtk_header_bar_set_has_subtitle(GTK_HEADER_BAR(header), FALSE);
+
+    new_button = gtk_button_new_from_icon_name("utilities-terminal-symbolic", GTK_ICON_SIZE_MENU);
+    gtk_header_bar_pack_start(GTK_HEADER_BAR(header), GTK_WIDGET(new_button));
+
+    copy_button = gtk_button_new_from_icon_name("edit-copy-symbolic", GTK_ICON_SIZE_MENU);
+    gtk_header_bar_pack_start(GTK_HEADER_BAR(header), GTK_WIDGET(copy_button));
+
+    paste_button = gtk_button_new_from_icon_name("edit-paste-symbolic", GTK_ICON_SIZE_MENU);
+    gtk_header_bar_pack_start(GTK_HEADER_BAR(header), GTK_WIDGET(paste_button));
+
+    gtk_window_set_titlebar(GTK_WINDOW(window), GTK_WIDGET(header));
+    gtk_widget_set_app_paintable(GTK_WIDGET(window), TRUE);
 
     visual = gdk_screen_get_rgba_visual(gtk_widget_get_screen(window));
-    gtk_widget_set_visual(GTK_WINDOW(window), visual);
+    gtk_widget_set_visual(GTK_WIDGET(window), visual);
 
     scrolled = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_overlay_scrolling(GTK_SCROLLED_WINDOW(scrolled), 5);
@@ -96,10 +109,12 @@ int main(int argc, char *argv[])
     g_signal_connect(terminal, "drag_data_received", G_CALLBACK(on_drag_data_received), GTK_WINDOW(window));
 
     g_signal_connect(terminal, "child-exited", gtk_main_quit, NULL);
-    g_signal_connect(terminal, "window-title-changed", G_CALLBACK(on_title_changed), GTK_WINDOW(window));
     g_signal_connect(terminal, "key_press_event", G_CALLBACK(on_key_press), GTK_WINDOW(window));
+    g_signal_connect(terminal, "window-title-changed", G_CALLBACK(on_title_changed), GTK_WINDOW(window));
 
-    g_signal_connect(terminal, "button-press-event", G_CALLBACK(terminal_right_click), NULL);
+    g_signal_connect(new_button, "clicked", G_CALLBACK(open), terminal);
+    g_signal_connect(copy_button, "clicked", G_CALLBACK(copy), terminal);
+    g_signal_connect(paste_button, "clicked", G_CALLBACK(paste), terminal);
 
     gtk_container_add(GTK_CONTAINER(scrolled), terminal);
     gtk_widget_show_all(terminal);
@@ -111,5 +126,5 @@ int main(int argc, char *argv[])
     gtk_widget_show_all(window);
 
     gtk_main();
-    exit(0);
+    return 0;
 }
