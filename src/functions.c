@@ -11,7 +11,7 @@ static void open(GtkButton *new_button, GtkWidget *terminal)
 /* Copy */
 static void copy(GtkButton *copy_button, GtkWidget *terminal)
 {
-    vte_terminal_copy_clipboard(VTE_TERMINAL(terminal));
+    vte_terminal_copy_clipboard_format(VTE_TERMINAL(terminal), VTE_FORMAT_TEXT);
 }
 
 
