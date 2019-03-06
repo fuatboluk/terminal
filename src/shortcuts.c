@@ -10,7 +10,7 @@ static gboolean on_key_press(GtkWidget *terminal, GdkEventKey *event, gpointer u
       case GDK_KEY_C:
         if (event->state & GDK_CONTROL_MASK){
             if (event->state & GDK_SHIFT_MASK){
-                vte_terminal_copy_clipboard(VTE_TERMINAL(terminal));
+                vte_terminal_copy_clipboard_format(VTE_TERMINAL(terminal), VTE_FORMAT_TEXT);
                 return TRUE;
             }
             return FALSE;
