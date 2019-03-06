@@ -21,6 +21,19 @@
 #include "functions.c"
 
 
+static void on_temrinal_command_spawned(VteTerminal *terminal G_GNUC_UNUSED, GPid pid G_GNUC_UNUSED,
+                                        GError *error, gpointer user_data)
+{
+    if (error) {
+        g_critical("%s", error->message);
+        g_error_free(error);
+        exit(EXIT_FAILURE);
+    }
+
+    gtk_widget_show_all(user_data);
+}
+
+
 /* Change Title */
 static void on_title_changed(GtkWidget *terminal, gpointer user_data)
 {
@@ -70,6 +83,9 @@ int main(int argc, char *argv[])
     gtk_scrolled_window_set_overlay_scrolling(GTK_SCROLLED_WINDOW(scrolled), 5);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
+    gtk_scrolled_window_set_min_content_width(GTK_SCROLLED_WINDOW(scrolled), 765);
+    gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(scrolled), 360);
+
     terminal = vte_terminal_new();
     vte_terminal_set_color_background(VTE_TERMINAL(terminal), &back_rgba);
     vte_terminal_set_color_foreground(VTE_TERMINAL(terminal), &front_rgba);
@@ -83,17 +99,19 @@ int main(int argc, char *argv[])
     gchar **command = (gchar *[]){g_strdup(g_environ_getenv(envp, "SHELL")), NULL };
     g_strfreev(envp);
 
-    vte_terminal_spawn_sync(VTE_TERMINAL(terminal),
-                            pty_flags,
-                            NULL,       /* working directory */
-                            command,    /* command           */
-                            NULL,       /* environment       */
-                            0,          /* spawn flags       */
-                            NULL,       /* child setup       */
-                            NULL,       /* data              */
-                            NULL,       /* child pid         */
-                            NULL,       /* cancelable        */
-                            NULL);      /* error             */
+    vte_terminal_spawn_async(VTE_TERMINAL(terminal),
+                             pty_flags,
+                             g_get_home_dir(),             /* working directory */
+                             command,                      /* command           */
+                             NULL,                         /* environment       */
+                             G_SPAWN_SEARCH_PATH,          /* spawn flags       */
+                             NULL,                         /* child setup       */
+                             NULL,                         /* data              */
+                             NULL,                         /* data destroy      */
+                             -1,                           /* timeout           */
+                             NULL,                         /* cancelable        */
+                             on_temrinal_command_spawned,  /* callback          */
+                             window);                      /* user data         */
 
     vte_terminal_set_scrollback_lines(VTE_TERMINAL(terminal), -1);
     vte_terminal_set_scroll_on_output(VTE_TERMINAL(terminal), TRUE);
