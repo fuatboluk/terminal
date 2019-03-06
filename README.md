@@ -47,7 +47,6 @@
   
  # Derleme ve Çalıştırma
  
- * Kaynak dizin içerisinde \`make\` komutunu koşun.
- * Derleme tamamlanınca bulunduğunuz dizinde terminal adı ile bir ikili dosya oluşacaktır. Bu dosyayı \`/usr/bin\` dizini içine kopyalayın.
- * Uygulamalar menüsüne eklemek için \`terminal.desktop\` dosyasını \`/usr/share/applications\` dizinine kopyalayın.
- * Dilerseniz \`LICENSE\` ve \`README.md\` dosyalarını \`/usr/share/doc\` dizini içerisinde \`terminal\` adında bir dizin oluşturarak içine kopyalayabilirsiniz.
+ * Kaynak dizin içerisinde `make` komutunu koşun.
+ * Derleme tamamlanınca bulunduğunuz dizinde terminal adı ile bir ikili dosya oluşacaktır. Bu dosyayı `/usr/bin` dizini içine kopyalayın.
+ * Uygulamalar menüsüne eklemek için `terminal.desktop` dosyasını `/usr/share/applications` dizinine kopyalayın.
