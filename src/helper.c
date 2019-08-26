@@ -16,15 +16,8 @@ void utf8_decode(char *dst, const char *src)
             *dst++ = 16*a+b;
             src+=3;
         } 
-        else if(*src == '+') 
-        {
-            *dst++ = ' ';
-            src++;
-        } 
-        else 
-        {
-            *dst++ = *src++;
-        }
+        
+        *dst++ = *src++;
     }
     *dst++ = '\0';
 }
