@@ -12,11 +12,9 @@ static GtkTargetEntry target_list[] = {
 /* Drag Drop */
 static gboolean on_drag_drop(GtkWidget *terminal, GdkDragContext *context, gint x, gint y, guint time, gpointer user_data)
 {
-    gboolean valid;
-    GdkAtom target = gdk_atom_intern_static_string("text/plain");
-
+    gboolean valid = TRUE;
+    static GdkAtom target = GDK_NONE;
     const gchar *name = gtk_widget_get_name(terminal);
-    valid = TRUE;
 
     if (gdk_drag_context_list_targets(context)) {
         target = GDK_POINTER_TO_ATOM(gdk_drag_context_list_targets(context));
@@ -33,7 +31,8 @@ static gboolean on_drag_drop(GtkWidget *terminal, GdkDragContext *context, gint 
 static gboolean on_drag_data_received(GtkWidget *terminal, GdkDragContext *context, int x, int y,
                                       GtkSelectionData *selection_data, guint info, guint time)
 {
-    char *data, *uris;
+    char *data;
+    char *uris;
     char url[1000];
     gboolean success = FALSE;
     gboolean success_data = FALSE;
