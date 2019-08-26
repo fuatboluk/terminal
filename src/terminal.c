@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
 
     g_signal_connect(window, "delete-event", gtk_main_quit, NULL);
 
-    gtk_drag_dest_set(terminal, GTK_DEST_DEFAULT_ALL, target_list, 3, GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+    gtk_drag_dest_set(terminal, GTK_DEST_DEFAULT_ALL, target_list, 2, GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
 
     g_signal_connect(terminal, "drag_drop", G_CALLBACK(on_drag_drop), GTK_WINDOW(window));
     g_signal_connect(terminal, "drag_data_received", G_CALLBACK(on_drag_data_received), GTK_WINDOW(window));
