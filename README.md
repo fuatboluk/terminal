@@ -4,7 +4,7 @@
 
   It was designed to be very light and to meet the terminal needs without straining the system.
 
-  You can see the screenshot below.
+# Screenshot:
   
   ![Alt text](https://gitlab.com/fuxproject/terminal/raw/master/terminal.png "Terminal Screenshot")
 
