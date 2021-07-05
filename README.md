@@ -6,9 +6,9 @@
 
   You can see the screenshot below.
   
-  ![Alt text](https://gitlab.com/fuxproject/terminal/raw/master/terminal.png "Terminal Ekran Görüntüsü")
+  ![Alt text](https://gitlab.com/fuxproject/terminal/raw/master/terminal.png "Terminal Screenshot")
 
-# Terminal features:
+# Features:
 
   * Drag drop
   * Keyboard shortcuts
