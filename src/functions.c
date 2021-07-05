@@ -1,4 +1,4 @@
-/* Author: Fuat Bölük <fuat@fuxproject.org> */
+/* Author: Fuat Bölük <mektup@fuatboluk.com.tr> */
 
 
 /* Open */
@@ -20,3 +20,6 @@ static void paste(GtkButton *paste_button, GtkWidget *terminal)
 {
     vte_terminal_paste_clipboard(VTE_TERMINAL(terminal));
 }
+
+
+/* End */
