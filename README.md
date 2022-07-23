@@ -6,7 +6,7 @@
 
 # Screenshot:
   
-  ![Alt text](https://gitlab.com/fuxproject/terminal/raw/master/terminal.png "Terminal Screenshot")
+  ![Alt text](https://github.com/fuatboluk/terminal/delete/master/terminal_screenshot.png "Terminal Screenshot")
 
 # Features:
 
